@@ -69,6 +69,9 @@ Costs are incurred for SageMaker AI GPU time, Rekognition calls, and S3 storage.
 │   └── uv.lock                   # Locked GPU generation dependencies
 ├── .gitignore                    # Ignores datasets/, caches, model weights, etc.
 ├── .python-version               # Pins Python to 3.11 (for pyenv/uv)
+├── CODE_OF_CONDUCT.md            # Community code of conduct
+├── CONTRIBUTING.md               # Contribution guidelines
+├── LICENSE                       # MIT-0 license
 ├── README.md                     # Project overview, setup, and full usage walkthrough
 ├── pyproject.toml                # Root project dependencies (uv-managed)
 └── uv.lock                       # Locked dependency versions for the root pyproject.toml
