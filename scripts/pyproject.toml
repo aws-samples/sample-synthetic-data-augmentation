@@ -1,0 +1,32 @@
+[project]
+name = "synthetic-generation"
+version = "0.1.0"
+description = "Deps for running Qwen Image Edit synthetic generation on SageMaker g5 instances"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "torch==2.7.1",
+    "torchvision==0.22.1",
+    "torchaudio==2.7.1",
+    "accelerate",
+    "transformers",
+    "kernels",
+    "ipykernel==7.1.0",
+    "s3fs==2025.12.0",
+    "polars",
+    "boto3",
+    "tqdm",
+    "numpy<2.3.0",
+    "Pillow",
+    "diffusers",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
+torchvision = { index = "pytorch-cu126" }
+torchaudio = { index = "pytorch-cu126" }
+diffusers = { git = "https://github.com/huggingface/diffusers", rev = "256e0106749363fce06c28000698edeaf56a874d" }

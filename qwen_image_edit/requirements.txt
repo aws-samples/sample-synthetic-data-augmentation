@@ -1,0 +1,27 @@
+# Runtime dependencies for the SageMaker generation job.
+#
+# The SageMaker PyTorch DLC (framework_version 2.5.1, py311) already provides
+# torch/torchvision — do NOT pin torch here or it will fight the base image.
+# SageMaker auto-installs these extra packages from source_dir. Direct notebook
+# and CLI runs instead use the locked scripts/pyproject.toml environment.
+
+# Qwen Image Edit needs this specific diffusers commit.
+git+https://github.com/huggingface/diffusers.git@256e0106749363fce06c28000698edeaf56a874d
+accelerate
+transformers
+kernels
+
+# NOTE on flash-attn: the SageMaker PyTorch DLC ships an older flash_attn (~2.6.x)
+# that is missing a symbol diffusers 0.36+ imports (_wrapped_flash_attn_backward,
+# added in flash-attn 2.7.0), which crashes `import diffusers`. We do NOT reinstall
+# flash-attn here (building it under pip's isolation fails: no torch at build time).
+# Instead model.load_pipeline() removes the incompatible flash_attn before importing
+# diffusers, so it falls back to standard attention -- the same behavior as a clean
+# notebook env, which has no flash-attn installed.
+
+s3fs==2025.12.0
+polars
+boto3
+tqdm
+numpy<2.3.0
+Pillow
